@@ -44,7 +44,7 @@ Connect with friends and the world around you in the real world.
 	Password &nbsp; <input type ='password' name = 'password' style="width:200px; height:20px;"  placeholder="Passwords">
 
 	<p >
-	By clicking Join Now, you agree to LinkedIn's User Agreement, Privacy Policy and Cookie Policy.
+	By clicking Join Now, you agree to Geocatchup's User <br>Agreement, Privacy Policy and Cookie Policy.
 	</p>
 <?php if(isset($uniqueness)): ?>
 		<div class = "error">

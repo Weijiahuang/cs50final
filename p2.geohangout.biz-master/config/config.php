@@ -32,7 +32,7 @@ A email designated to receive messages from the server. Examples:
 	// sent to you when you have problem for the application 
 
 # Default DB name for this app
-	define('DB_NAME', "geohango_p2_geohangout_biz"); 
+	define('DB_NAME', "geocatch_CS50geocatchup"); 
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');

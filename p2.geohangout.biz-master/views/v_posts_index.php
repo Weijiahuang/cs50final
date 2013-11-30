@@ -165,14 +165,10 @@ function newDoc()
           var bValid = true;
           allFields.removeClass( "ui-state-error" );
  
-          bValid = bValid && checkLength( interest, "interest", 3, 16 );
-          bValid = bValid && checkLength( time, "time", 6, 80 );
-          bValid = bValid && checkLength( place, "place", 5, 16 );
-          bValid = bValid && checkRegexp( interest, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
-          // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
-          bValid = bValid && checkRegexp( time, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
-          bValid = bValid && checkRegexp( place, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
- 
+          bValid = bValid && checkLength( interest, "interest", 0, 60 );
+          bValid = bValid && checkLength( time, "time", 0, 80 );
+          bValid = bValid && checkLength( place, "place", 0, 50 );
+          
           if ( bValid ) {
 			$("form#eventForm").submit();
             $( this ).dialog( "close" );
@@ -205,35 +201,39 @@ function newDoc()
 </div>
 
  
-<img src= "/uploads/<?=$user->picture;?>" style = "height:150px; width:150px; position:absolute; margin-top:-20px; margin-left:125px;"><br>
+<img src= "/uploads/<?=$user->picture;?>" style = "height:185px; width:200px; position:absolute; margin-top:-20px; margin-left:78px;"><br>
  
+<!- pop up windows  >
 <div id="dialog-form" title="Make an event">
   <p class="validateTips">All form fields are required.</p>
   <form name="eventForm" id="eventForm" method="post" action="/posts/p_add">
   <fieldset>
     <label for="interest">Interest</label>
-    <input type="text" name="interest" id="interest" class="text ui-widget-content ui-corner-all">
+    <input type="text" style="width:300px;" name="interest" id="interest" class="text ui-widget-content ui-corner-all">
     <label for="email">Time frame</label>
-    <input type="text" name="Time" id="time" value="" class="text ui-widget-content ui-corner-all">
+    <input type="text" style="width:300px;" name="Time" id="time" value="" class="text ui-widget-content ui-corner-all">
     <label for="password">Place</label>
-    <input type="text" name="place" id="place" value="" class="text ui-widget-content ui-corner-all">
+    <input type="text" style="width:300px;" name="place" id="place" value="" class="text ui-widget-content ui-corner-all">
   </fieldset>
   </form>
 </div>
  
-<div id='profilemenu'>
+<div id='profilemenu' >
    <div id size="fontsize" style="color:#c0ac0f; font-size:40px; position:absolute; flow:left; margin-left:50px;">
 			<strong>   Spur!</strong>
 		</div>
-	<div id ="mainpage" style="flow:middle;">
+	<div id ="mainpage" >
         <!-- Menu for users who are logged in -->
+        
         <?php if($user): ?>
-            <a style="color:white; text-decoration:none; font-size:16px;" href='/users/logout'>Logout</a>
-            <a style="color:white; text-decoration:none; font-size:15px;" href='/users/profile'>Profile</a>
+            <a style="color:white; text-decoration:none; font-size:20px; float:right; margin-right:20px;" href='/users/logout'>Logout</a>
+           
+            <a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:410px;" href='/users/profile'>Profile</a>
             
-			<button id ="create-user" style="padding:0px; ;">Add a post</button>
-			<a style="color:white; text-decoration:none; font-size:16px" href='/posts/index'>View post<a>
-			<a style="color:white; text-decoration:none; font-size:16px" href='/posts/users'>Users<a>
+			<button id ="create-user" style="padding:0px; position:absolute; margin-left:510px" >Add a post</button>
+			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:630px" href='/posts/index'>View post<a>
+			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:750px" href='/posts/users'>Users<a>
+			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:830px;" href =''> About us			<a>
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
 
@@ -244,24 +244,40 @@ function newDoc()
        
 </div>
 
+<div style= "position:absolute; height:150px; font-size:13px; background-color:white; width:220px;; margin-left:60px; margin-top:400px;">
+<ul >
+<li >Date </li>
+<li > All Dates (756) </li>
+<li> Today (11) </li>
+<li> Tomorrow (7) </li>
+<li>This Week (17)
+<li>This Weekend (17)
+<li>Next Week (136)
+<li >Next Month (261)
+</ul>
+</div>
+
 <br>
+<!- bulletin board- >
 <div id ='windows'>
 <div id="users-contain" class="ui-widget">
   <h1>Existing Posts:</h1>
 </div>
 <br>
 <?php foreach($posts as $post): ?>
-<div id = "box" style="border: 1px solid black; width:90%;">
+<div id = "box" style="border: 1px solid black; font-size:14px; width:90%;">
 <article>
-   <img src= "/uploads/<?=$post['picture'];?>" style = "height:40px; width:40px;"><br>     
+   <img src= "/uploads/<?=$post['picture'];?>" style = "height:70px; width:70px;"><br> 
+    <div style="position:absolute; margin-left:80px; margin-top:-70px;">   
     <strong style="color:#819FF7"><?=$post['first_name']?> <?=$post['last_name']?> posted: </strong>
     <?=$post['content']?><br>  
     Interest: <?=$post['interest']?><br>
     Time: <?=$post['time']?><br>
-    Place: <?=$post['place']?>
+    Place: <?=$post['place']?> &nbsp;&nbsp;
     <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
         <?=Time::display($post['created'])?>
     </time>
+    </div>
 </article>
 </div>
 <br>

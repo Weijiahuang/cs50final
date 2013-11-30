@@ -5,11 +5,11 @@
 	<div id ="mainpage">
         <!-- Menu for users who are logged in -->
         <?php if($user): ?>
-            <a style="color:white; text-decoration:none;" href='/users/logout'>Logout</a>
-            <a style="color:white; text-decoration:none;" href='/users/profile'>Profile</a>
-			<button id ="create-user">Add a post</button>
-			<a style="color:white; text-decoration:none;" href='/posts/index'>View post<a>
-			<a style="color:white; text-decoration:none;" href='/posts/users'>Users<a>
+            <a style="color:white; text-decoration:none;font-size:20px; float:right; margin-right:20px;" href='/users/logout'>Logout</a>
+            <a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:430px;" href='/users/profile'>Profile</a>
+			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:520px;" href='/posts/index'>View post<a>
+			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:630px;" href='/posts/users'>Users<a>
+			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:710px;" href=''>About us<a>
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
 

@@ -66,6 +66,7 @@ input[type=button], input[type=button]:hover {
 body
 {
  background-color: #E6E6E6;
+ background-image: url('/img/background_paper.jpg');
  link="white";
 }
 #signin
@@ -96,7 +97,6 @@ box-shadow: 0 1px 4px #ccc;
 {
 margin-top: 10px;
 position: relative;
-float: right;
 margin-right: 10px;
 }
 
@@ -113,6 +113,7 @@ background: -webkit-linear-gradient(top, #2F2727, #892222);
 -webkit-box-shadow: 0 1px 4px #ccc;
 -moz-box-shadow: 0 1px 4px #ccc;
 box-shadow: 0 1px 4px #ccc;
+position: fixed;
 }
 
 #head1
@@ -138,6 +139,14 @@ background-image: url('/img/first_page.png');
 	color:red;
 	font-size:12px;
 }
+
+#circle
+{
+height:40;
+width:auto;
+background-color: white;
+}
+
 
 #logo
 {
