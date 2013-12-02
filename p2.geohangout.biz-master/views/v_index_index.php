@@ -24,7 +24,7 @@ Password
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <a href="" style="text-decoration:none">Forget? </a></span>
+   <a href="" style="text-decoration:none; color:#2E64FE;"> Forget? </a></span>
 </form>
 </div>
 </div>

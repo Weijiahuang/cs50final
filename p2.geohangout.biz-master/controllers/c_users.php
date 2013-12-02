@@ -92,7 +92,7 @@ class users_controller extends base_controller {
 			}
 	    	$to = $_POST['email'] ;
 			$subject = "Thanks for signing up";
-			$message = "Congradulations on signup.";
+			$message = "Congratulations on signup.";
 			$from = "hhuangweijia@gmail.com";
 			$headers = "From:" . $from;
 			mail($to,$subject,$message,$headers);

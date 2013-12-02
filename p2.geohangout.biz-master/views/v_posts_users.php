@@ -21,9 +21,9 @@
 
 <br>
 <br>
-<center><h1> Please follow other users, so that you can see their posts</h1> </center>
-
+<center><h1> Please follow other users, so that you can see their posts</h1></center>
 <br>
+
 <br>
 <br>
 <div id ='windows'>

@@ -85,10 +85,10 @@ function newDoc()
  <style > 
   #mapContainer {
     height: 30%  !important;
-    width: 15% !important;
+    width: 16.1% !important;
     border:5px solid black;
     position: absolute;
-    top : 330px; left : 70px;
+    top : 330px; left : 3.5%;
 }
 #logout{
 	position: relative;
@@ -97,25 +97,16 @@ function newDoc()
 }
 </style>
   
-  <div id="mapContainer" ></div>
- 
- 
- 
-  
-  
-  
   <style>
     body { font-size: 62.5%; }
     label, input { display:block; }
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
     fieldset { padding:0; border:0; margin-top:25px; }
     h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 350px; margin: 20px 0; }
-    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
   </style>
+  
   <script>
   $(function() {
     var 
@@ -157,7 +148,7 @@ function newDoc()
  
     $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 400,
+      height: 350,
       width: 350,
       modal: true,
       buttons: {
@@ -168,7 +159,10 @@ function newDoc()
           bValid = bValid && checkLength( interest, "interest", 0, 60 );
           bValid = bValid && checkLength( time, "time", 0, 80 );
           bValid = bValid && checkLength( place, "place", 0, 50 );
-          
+          bValid = bValid && checkRegexp( interest, /^[a-z]([0-9a-z_])+$/i, "Activity name may consist of a-z, 0-9, underscores, begin with a letter." );
+         bValid = bValid && checkRegexp(time, /^([0-9a-z-:])+$/i, "Incorrect time frame ");
+         bValid = bValid && checkRegexp( place, /^([0-9a-zA-Z ])+$/, "Place field only allow : a-z 0-9 and A-Z" );
+    
           if ( bValid ) {
 			$("form#eventForm").submit();
             $( this ).dialog( "close" );
@@ -194,26 +188,36 @@ function newDoc()
 <body>
 <br>
 <br>
+
+<!- map  ->
+  <div id="mapContainer" ></div>
+
+<!-- search bar -->
 <div class="light">
-<form>
-	<input type="text" class="search rounded" style="margin-left:-60px;height:20px;width:180px;" placeholder="Search for movie,music"> <input type="text" class="search square" style="margin-top:-38px; margin-left:200px; height:20px;width:180px;" placeholder="Place: MA, for example"><input type="button" value="Search" style="margin-top:-40px; margin-left:450px; width:100px; height:35px;" >
+<form action="/posts/search" method="get">
+<input type="text" name="interest" class="search rounded" style="margin-left:-60px;height:20px;width:180px;" placeholder="Search for movie,music"> 
+<input type="text" name="place" class="search square" style="margin-top:-38px; margin-left:200px; height:20px;width:180px;" placeholder="Place: MA, for example">
+<input type="submit" name="search" value="Search Now" style="margin-top:-40px; margin-left:450px; width:100px; height:35px;" >
+
 </form>
+
 </div>
 
+ <!--prfoile picture  -->
+<img src= "/uploads/<?=$user->picture;?>" style = "height:185px; width:16.9%; position:absolute; margin-top:-20px; margin-left:3%;"><br>
  
-<img src= "/uploads/<?=$user->picture;?>" style = "height:185px; width:200px; position:absolute; margin-top:-20px; margin-left:78px;"><br>
  
 <!- pop up windows  >
 <div id="dialog-form" title="Make an event">
   <p class="validateTips">All form fields are required.</p>
   <form name="eventForm" id="eventForm" method="post" action="/posts/p_add">
   <fieldset>
-    <label for="interest">Interest</label>
-    <input type="text" style="width:300px;" name="interest" id="interest" class="text ui-widget-content ui-corner-all">
+    <label for="interest">Activity</label>
+    <input type="text" style="width:300px;" name="interest" id="interest" placeholder="Movie,Music" class="text ui-widget-content ui-corner-all">
     <label for="email">Time frame</label>
-    <input type="text" style="width:300px;" name="Time" id="time" value="" class="text ui-widget-content ui-corner-all">
+    <input type="text" style="width:300px;" name="Time" id="time" placeholder="11:20am-2:20pm Nov 12th" class="text ui-widget-content ui-corner-all">
     <label for="password">Place</label>
-    <input type="text" style="width:300px;" name="place" id="place" value="" class="text ui-widget-content ui-corner-all">
+    <input type="text" style="width:300px;" name="place" id="place" placeholder="Cambridge,MA" class="text ui-widget-content ui-corner-all">
   </fieldset>
   </form>
 </div>
@@ -226,14 +230,14 @@ function newDoc()
         <!-- Menu for users who are logged in -->
         
         <?php if($user): ?>
-            <a style="color:white; text-decoration:none; font-size:20px; float:right; margin-right:20px;" href='/users/logout'>Logout</a>
+            <a style="color:white; text-decoration:none; font-size:20px; font-family:Arial; float:right; margin-right:20px;" href='/users/logout'>Logout</a>
            
-            <a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:410px;" href='/users/profile'>Profile</a>
+            <a style="color:white; text-decoration:none; font-size:20px; font-family:Arial; position:absolute; margin-left:410px;" href='/users/profile'>Profile</a>
             
-			<button id ="create-user" style="padding:0px; position:absolute; margin-left:510px" >Add a post</button>
-			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:630px" href='/posts/index'>View post<a>
-			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:750px" href='/posts/users'>Users<a>
-			<a style="color:white; text-decoration:none; font-size:20px; position:absolute; margin-left:830px;" href =''> About us			<a>
+			<button id ="create-user" style="padding:0px; font-size:15px; font-family:Arial; position:absolute; margin-left:500px; margin-top:-1px;" >Add a post</button>
+			<a style="color:white; text-decoration:none; font-size:20px; font-family:Arial; position:absolute; margin-left:630px" href='/posts/index'>View post<a>
+			<a style="color:white; text-decoration:none; font-size:20px; font-family:Arial; position:absolute; margin-left:750px" href='/posts/users'>Users<a>
+			<a style="color:white; text-decoration:none; font-size:20px; font-family:Arial; position:absolute; margin-left:830px;" href =''> About us			<a>
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
 
@@ -244,7 +248,7 @@ function newDoc()
        
 </div>
 
-<div style= "position:absolute; height:150px; font-size:13px; background-color:white; width:220px;; margin-left:60px; margin-top:400px;">
+<div style= "position:absolute; height:150px; font-size:13px; background-color:white; width:16.8%; margin-left:3%; margin-top:383px; z-index:-1; ">
 <ul >
 <li >Date </li>
 <li > All Dates (756) </li>
@@ -260,10 +264,7 @@ function newDoc()
 <br>
 <!- bulletin board- >
 <div id ='windows'>
-<div id="users-contain" class="ui-widget">
-  <h1>Existing Posts:</h1>
-</div>
-<br>
+  <h1 style="font-family:Arial; font-size:20px;">Existing Posts:</h1>
 <?php foreach($posts as $post): ?>
 <div id = "box" style="border: 1px solid black; font-size:14px; width:90%;">
 <article>
@@ -271,7 +272,7 @@ function newDoc()
     <div style="position:absolute; margin-left:80px; margin-top:-70px;">   
     <strong style="color:#819FF7"><?=$post['first_name']?> <?=$post['last_name']?> posted: </strong>
     <?=$post['content']?><br>  
-    Interest: <?=$post['interest']?><br>
+    Activity: <?=$post['interest']?><br>
     Time: <?=$post['time']?><br>
     Place: <?=$post['place']?> &nbsp;&nbsp;
     <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
